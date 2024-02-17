@@ -1,0 +1,1 @@
+INSERT INTO PASSWORD (id ,title,username,password,url,email,notes )VALUES ('123456789','instagram','kalalvidhi','vidhi@10','https://insta//vidhi','vidhikalal15@gmail.com','instapassword')
