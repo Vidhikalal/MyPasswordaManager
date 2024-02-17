@@ -1,6 +1,4 @@
 package ca.sheridancollege.kalalv.assignment2.utilities;
-import ca.sheridancollege.kalalv.assignment2.beans.PasswordRecord;
-import org.springframework.data.annotation.Id;
 
 import java.util.Random;
 
