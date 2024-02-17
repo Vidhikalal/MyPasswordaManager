@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeControllers {
 
-public DatabaseAccess databaseAccess;
 @GetMapping("/")
-public String ReturnIndex(Model model){
-    model.addAttribute("passwordList", databaseAccess.findAll());
+public String ReturnIndex(){
+
     return "index";
 }
 

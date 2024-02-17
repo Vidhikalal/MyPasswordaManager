@@ -1,1 +1,1 @@
-INSERT INTO PASSWORD_RECORD (ID,TITLE,USERNAME,PASSWORD,URL,EMAIL,NOTES )VALUES (123456789,'instagram','kalalvidhi','vidhi@10','https://insta//vidhi','vidhikalal15@gmail.com','instapassword');
+INSERT INTO PASSWORD_RECORD (id,title,username,password,url,email,notes )VALUES (123456789,'instagram','kalalvidhi','vidhi@10','https://insta//vidhi','vidhikalal15@gmail.com','instapassword');

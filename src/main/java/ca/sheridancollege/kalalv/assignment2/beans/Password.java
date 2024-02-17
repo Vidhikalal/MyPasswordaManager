@@ -4,23 +4,30 @@ import ca.sheridancollege.kalalv.assignment2.utilities.RandomNumberGenerator;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Table;
+import lombok.*;
 
-import lombok.NonNull;
 import org.springframework.data.annotation.Id;
-   @Data
+    @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @Builder
+    @Table(name="PASSWORD_RECORD")
     public class Password {
-        @NonNull
+        @Id
+        @Column(name="id")
         private Long id;
+        @Column(name="title")
         private String title;
+        @Column(name="username")
         private String username;
+        @Column(name="password")
         private String password;
+        @Column(name="url")
         private String url;
+        @Column(name="email")
         private String email;
+        @Column(name="notes")
         private String notes;
 
 
