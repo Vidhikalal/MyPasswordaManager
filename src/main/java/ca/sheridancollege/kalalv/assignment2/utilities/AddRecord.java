@@ -31,7 +31,7 @@ public class AddRecord {
             return (List<Password>) databaseAccess.findAll();
         }
         public List<Password> findByTitle(String title){
-        return (List<Password>) databaseAccess.findByTitle(title);
+        return (List<Password>) databaseAccess.findByTitle(title) ;
         }
 
 

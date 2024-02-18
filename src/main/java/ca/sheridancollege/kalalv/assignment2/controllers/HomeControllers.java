@@ -3,6 +3,7 @@ package ca.sheridancollege.kalalv.assignment2.controllers;
 
 import ca.sheridancollege.kalalv.assignment2.beans.Password;
 import ca.sheridancollege.kalalv.assignment2.database.DatabaseAccess;
+import ca.sheridancollege.kalalv.assignment2.utilities.AddRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Controller;
@@ -18,31 +19,36 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
 public class HomeControllers {
-    Autowired
-    private DatabaseAccess databaseAccess;
+    private final DatabaseAccess databaseAccess;
+    private final AddRecord addRecord;
+    @Autowired
+    public HomeControllers(DatabaseAccess databaseAccess,AddRecord addRecord) {
+        this.databaseAccess = databaseAccess;
+        this.addRecord=addRecord;
+    }
+
+
     @GetMapping("/")
-    public String ReturnIndex(){
+    public String ReturnIndex() {
 
         return "index";
     }
-    @PostMapping("/addrecord")
-    public void Addrecord(Model model){
-
-        public String addRecord( Model model) {
-            Password p= new Password();
-            p.setId(databaseAccess.generateRandomId());
-
-            // Save the password record
-            databaseAccess.SavePasswordRecord(p);
-
-            // Add a success message to the model
-            model.addAttribute("message", "Password record added successfully!");
-
-            // Redirect back to the home page after adding the record
-            return "redirect:/";
-        }
-
-    }
+//    @PostMapping("/addrecord")
+//        public void Addrecord(Model model){
+//
+//            public String addRecord( Model model) {
+//                Password p= new Password();
+//                p.setId(databaseAccess.generateRandomId());
+//
+//                // Save the password record
+//                databaseAccess.SavePasswordRecord(p);
+//
+//                // Add a success message to the model
+//                model.addAttribute("message", "Password record added successfully!");
+//
+//                // Redirect back to the home page after adding the record
+//                return "redirect:/";
+//            }?
     @GetMapping("/searchPass")
     public String ReturnSearchPassword(){
         return "searchPasswordRecord";
@@ -55,7 +61,7 @@ public class HomeControllers {
     }
     @GetMapping("/viewPass")
      public String ReturnPasswordRecord(Model model){
-        List<Password> p=databaseAccess.getAllPasswordRecords();
+        List<Password> p= addRecord.getAllPasswordRecords();
         model.addAttribute("passwordRecords",p);
         return "viewPasswordRecord";
      }
