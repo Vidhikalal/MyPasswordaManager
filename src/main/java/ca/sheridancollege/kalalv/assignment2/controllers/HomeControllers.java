@@ -8,10 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeControllers {
 
-@GetMapping("/")
-public String ReturnIndex(){
+    @GetMapping("/")
+    public String ReturnIndex(){
 
-    return "index";
-}
-
+        return "index";
+    }
+    @GetMapping("/searchPass")
+    public String ReturnSearchPassword(){
+        return "searchPasswordRecord";
+    }
+    @GetMapping("/viewPass")
+     public String ReturnPasswordRecord(){
+        return "viewPasswordRecord";
+     }
 }
