@@ -9,10 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class AddRecord {
-        @Autowired
-        private DatabaseAccess databaseAccess;
+    private final DatabaseAccess databaseAccess;
 
-        public void SavePasswordrecord(Long id,String title,String username,String password,String url,String email,String notes){
+    @Autowired
+    public AddRecord(DatabaseAccess databaseAccess) {
+        this.databaseAccess = databaseAccess;
+    }
+
+        public void SavePasswordRecord(Long id,String title,String username,String password,String url,String email,String notes){
             Password p=new Password();
               p.setId(RandomNumberGenerator.generateRandomId());
               p.setTitle(title);
@@ -23,10 +27,12 @@ public class AddRecord {
               p.setNotes(notes);
               databaseAccess.save(p);
         }
-        private List<Long> listContents = new ArrayList<>();
-
-
-        public void addInDatabase(long ID) {
-            listContents.add(ID);
+        public List<Password> getAllPasswordRecords() {
+            return (List<Password>) databaseAccess.findAll();
         }
+        public List<Password> findByTitle(String title){
+        return (List<Password>) databaseAccess.findByTitle(title);
+        }
+
+
 }
