@@ -4,6 +4,7 @@ package ca.sheridancollege.kalalv.assignment2.controllers;
 import ca.sheridancollege.kalalv.assignment2.beans.Password;
 import ca.sheridancollege.kalalv.assignment2.database.DatabaseAccess;
 import ca.sheridancollege.kalalv.assignment2.utilities.AddRecord;
+import ca.sheridancollege.kalalv.assignment2.utilities.RandomNumberGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,13 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 public class HomeControllers {
     private final DatabaseAccess databaseAccess;
     private final AddRecord addRecord;
+    private final RandomNumberGenerator random;
     @Autowired
-    public HomeControllers(DatabaseAccess databaseAccess,AddRecord addRecord) {
+    public HomeControllers(DatabaseAccess databaseAccess,AddRecord addRecord
+            ,RandomNumberGenerator random) {
         this.databaseAccess = databaseAccess;
         this.addRecord=addRecord;
+        this.random=random;
     }
 
 
@@ -33,22 +37,21 @@ public class HomeControllers {
 
         return "index";
     }
-//    @PostMapping("/addrecord")
-//        public void Addrecord(Model model){
-//
-//            public String addRecord( Model model) {
-//                Password p= new Password();
-//                p.setId(databaseAccess.generateRandomId());
-//
-//                // Save the password record
-//                databaseAccess.SavePasswordRecord(p);
-//
-//                // Add a success message to the model
-//                model.addAttribute("message", "Password record added successfully!");
-//
-//                // Redirect back to the home page after adding the record
-//                return "redirect:/";
-//            }?
+    @PostMapping("/addrecord")
+        public void Addrecord(Model model){
+
+
+                Password p= new Password();
+                p.setId(random.generateRandomId());
+
+
+               addRecord.SavePasswordRecord();
+
+                // Add a success message to the model
+                model.addAttribute("message", "Password record added successfully!");
+
+
+            }
     @GetMapping("/searchPass")
     public String ReturnSearchPassword(){
         return "searchPasswordRecord";
