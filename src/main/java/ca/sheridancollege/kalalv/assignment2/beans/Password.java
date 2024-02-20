@@ -13,7 +13,7 @@ import lombok.*;
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "ID")
-        private Long id;
+        private Long id=RandomNumberGenerator.generateRandomId();
         @Column(name = "TITLE")
         private String title;
         @Column(name = "USERNAME")
