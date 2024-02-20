@@ -2,7 +2,7 @@ package ca.sheridancollege.kalalv.assignment2.utilities;
 
 import ca.sheridancollege.kalalv.assignment2.beans.Password;
 
-import ca.sheridancollege.kalalv.assignment2.database.DatabaseAccess;
+import ca.sheridancollege.kalalv.assignment2.databases.DatabaseAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

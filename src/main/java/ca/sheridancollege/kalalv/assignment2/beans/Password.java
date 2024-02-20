@@ -1,34 +1,30 @@
 package ca.sheridancollege.kalalv.assignment2.beans;
 import ca.sheridancollege.kalalv.assignment2.utilities.RandomNumberGenerator;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Table;
 import lombok.*;
-
-import org.springframework.data.annotation.Id;
+;
     @Data
-
     @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
-    @Table(name="PASSWORD_RECORD")
+    @Entity(name="PASSWORD_RECORD")
     public class Password {
         @Id
-        @Column(name = "id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "ID")
         private Long id;
-        @Column(name = "title")
+        @Column(name = "TITLE")
         private String title;
-        @Column(name = "username")
+        @Column(name = "USERNAME")
         private String username;
-        @Column(name = "password")
+        @Column(name = "PASSWORD")
         private String password;
-        @Column(name = "url")
+        @Column(name = "URL")
         private String url;
-        @Column(name = "email")
+        @Column(name = "EMAIL")
         private String email;
-        @Column(name = "notes")
+        @Column(name = "NOTES")
         private String notes;
 
         public Long getId() {

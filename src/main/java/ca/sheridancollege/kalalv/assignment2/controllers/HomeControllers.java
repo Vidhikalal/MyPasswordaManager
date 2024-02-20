@@ -2,7 +2,7 @@ package ca.sheridancollege.kalalv.assignment2.controllers;
 
 
 import ca.sheridancollege.kalalv.assignment2.beans.Password;
-import ca.sheridancollege.kalalv.assignment2.database.DatabaseAccess;
+import ca.sheridancollege.kalalv.assignment2.databases.DatabaseAccess;
 import ca.sheridancollege.kalalv.assignment2.utilities.AddRecord;
 import ca.sheridancollege.kalalv.assignment2.utilities.RandomNumberGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,9 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
 public class HomeControllers {
-    private final DatabaseAccess databaseAccess;
+    private DatabaseAccess databaseAccess;
     private final AddRecord addRecord;
     private final RandomNumberGenerator random;
-    @Autowired
     public HomeControllers(DatabaseAccess databaseAccess,AddRecord addRecord
             ,RandomNumberGenerator random) {
         this.databaseAccess = databaseAccess;
@@ -37,21 +36,21 @@ public class HomeControllers {
 
         return "index";
     }
-    @PostMapping("/addrecord")
-        public void Addrecord(Model model){
-
-
-                Password p= new Password();
-                p.setId(random.generateRandomId());
-
-
-               addRecord.SavePasswordRecord();
-
-                // Add a success message to the model
-                model.addAttribute("message", "Password record added successfully!");
-
-
-            }
+//    @PostMapping("/addrecord")
+//        public void Addrecord(Model model){
+//
+//
+//                Password p= new Password();
+//                p.setId(random.generateRandomId());
+//
+//
+//               addRecord.SavePasswordRecord();
+//
+//                // Add a success message to the model
+//                model.addAttribute("message", "Password record added successfully!");
+//
+//
+//            }
     @GetMapping("/searchPass")
     public String ReturnSearchPassword(){
         return "searchPasswordRecord";
