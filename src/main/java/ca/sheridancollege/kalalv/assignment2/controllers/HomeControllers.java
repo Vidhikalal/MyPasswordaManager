@@ -12,9 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Random;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -22,46 +24,41 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 public class HomeControllers {
     private DatabaseAccess databaseAccess;
     private final AddRecord addRecord;
-    private final RandomNumberGenerator random;
-    public HomeControllers(DatabaseAccess databaseAccess,AddRecord addRecord
-            ,RandomNumberGenerator random) {
+    public HomeControllers(DatabaseAccess databaseAccess, AddRecord addRecord) {
         this.databaseAccess = databaseAccess;
-        this.addRecord=addRecord;
-        this.random=random;
+        this.addRecord = addRecord;
     }
 
 
     @GetMapping("/")
-    public String ReturnIndex() {
+    public String ReturnIndex(Model model) {
 
         return "index";
     }
-//    @PostMapping("/addrecord")
-//        public void Addrecord(Model model){
+//    @PostMapping("/addRecord")
+//        public String addRecord(Model model,@ModelAttribute Password record){
+//                Long id = RandomNumberGenerator.generateRandomId();
+//                record.setId(id);
 //
-//
-//                Password p= new Password();
-//                p.setId(random.generateRandomId());
-//
-//
-//               addRecord.SavePasswordRecord();
-//
-//                // Add a success message to the model
+//                databaseAccess.save(record);
+//                model.addAttribute("passwordRecord",new Password());
 //                model.addAttribute("message", "Password record added successfully!");
-//
+//                return "index";
 //
 //            }
+
     @GetMapping("/searchPass")
-    public String ReturnSearchPassword(){
+    public String getSearchPassword(){
         return "searchPasswordRecord";
-    }
-    @GetMapping("/searchByTitle")
-    public ModelAndView searchByTitle(@ModelAttribute("title")String title){
-        List<Password> p= databaseAccess.findByTitle(title);
-        return new ModelAndView("searchPasswordRecord","searchByTitle",p); //implement logic for title
 
     }
-    @GetMapping("/viewPass")
+    @PostMapping("/searchByTitle")
+    public String searchByTitle(@RequestParam("title") String title,Model model){
+        List<Password> s= addRecord.searchByTitle(title);
+        model.addAttribute("searchTitle",s);
+        return "searchPasswordRecord";
+    }
+    @GetMapping("/viewPass")//works perfect
      public String ReturnPasswordRecord(Model model){
         List<Password> p= addRecord.getAllPasswordRecords();
         model.addAttribute("passwordRecords",p);

@@ -13,7 +13,7 @@ public class RandomNumberGenerator {
 
 public static Long generateRandomId() {
     Random random = new Random();
-    return (long) (random.nextInt(900_000_000) + 100_000_000);
+    return (long) (Math.random()*(999999999 - 100000000)+100000000);
 }
 
 

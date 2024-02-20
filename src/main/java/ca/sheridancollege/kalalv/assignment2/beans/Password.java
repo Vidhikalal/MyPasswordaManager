@@ -11,9 +11,8 @@ import lombok.*;
     @Entity(name="PASSWORD_RECORD")
     public class Password {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "ID")
-        private Long id=RandomNumberGenerator.generateRandomId();
+        private Long id;
         @Column(name = "TITLE")
         private String title;
         @Column(name = "USERNAME")
