@@ -21,7 +21,7 @@
     <img src="Images/passmanage.png" atl="Logo">
     <form action="#" th:action="@{/addRecord}"  method="post" th:object="${newPasswordRecord}">
 
-
+        <input type="number" id="id" hidden th:field="*{id}" required><br><br>
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" th:field="*{title}" required><br><br>
 
