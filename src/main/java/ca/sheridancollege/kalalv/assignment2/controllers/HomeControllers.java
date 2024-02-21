@@ -20,9 +20,10 @@ import java.util.List;
 import java.util.Random;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
+@Controller
 public class HomeControllers {
-    private DatabaseAccess databaseAccess;
+
+    private  DatabaseAccess databaseAccess;
     private final AddRecord addRecord;
 
     List<Password> searchResults = new ArrayList<>();
@@ -53,7 +54,7 @@ public class HomeControllers {
     @GetMapping("/searchPass")
     public String getSearchPassword(Model model) {
         model.addAttribute("searchTitle",searchResults);
-        return "/searchPasswordRecord";
+        return "searchPasswordRecord";
     }
 
     @PostMapping("/searchByTitle")
