@@ -44,14 +44,13 @@ public class HomeControllers {
     }
 
     @PostMapping("/addRecord")
-    public String addRecord(@ModelAttribute Password password) {
+    public String addRecord(Model model,@ModelAttribute Password password) {
         id = RandomNumberGenerator.generateRandomId();
         password.setId(id);
         this.databaseAccess.save(password);
+        model.addAttribute("newPasswordRecord",new Password());
         return "redirect:/";
     }
-
-
     @GetMapping("/searchPass")
     public String getSearchPassword(Model model) {
         model.addAttribute("searchTitle",searchResults);

@@ -14,6 +14,10 @@ header {
 main {
     padding: 20px;
 }
+main img{
+    width:25%;
+    height: 25%;
+}
 
 footer {
     background-color: #333;
