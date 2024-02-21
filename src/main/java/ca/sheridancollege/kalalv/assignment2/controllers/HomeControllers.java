@@ -15,53 +15,56 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
-@Controller
 public class HomeControllers {
     private DatabaseAccess databaseAccess;
     private final AddRecord addRecord;
+
+    List<Password> searchResults = new ArrayList<>();
+    long id;
     public HomeControllers(DatabaseAccess databaseAccess, AddRecord addRecord) {
         this.databaseAccess = databaseAccess;
         this.addRecord = addRecord;
     }
 
 
+
     @GetMapping("/")
     public String ReturnIndex(Model model) {
-
+        model.addAttribute("newPasswordRecord", new Password());
+        id = RandomNumberGenerator.generateRandomId();
+        model.addAttribute("Id",id);
         return "index";
     }
-//    @PostMapping("/addRecord")
-//        public String addRecord(Model model,@ModelAttribute Password record){
-//                Long id = RandomNumberGenerator.generateRandomId();
-//                record.setId(id);
-//
-//                databaseAccess.save(record);
-//                model.addAttribute("passwordRecord",new Password());
-//                model.addAttribute("message", "Password record added successfully!");
-//                return "index";
-//
-//            }
+
+    @PostMapping("/addRecord")
+    public String addRecord(@ModelAttribute Password password) {
+        password.setId(id);
+        this.databaseAccess.save(password);
+        return "redirect:/";
+    }
+
 
     @GetMapping("/searchPass")
-    public String getSearchPassword(){
-        return "searchPasswordRecord";
-
+    public String getSearchPassword(Model model) {
+        model.addAttribute("searchTitle",searchResults);
+        return "/searchPasswordRecord";
     }
+
     @PostMapping("/searchByTitle")
-    public String searchByTitle(@RequestParam("title") String title,Model model){
-        List<Password> s= addRecord.searchByTitle(title);
-        model.addAttribute("searchTitle",s);
-        return "searchPasswordRecord";
+    public String searchByTitle(@RequestParam("search-title") String title) {
+        searchResults = databaseAccess.findByTitle(title);
+        return "redirect:/searchPass"; // Return the view directly
     }
     @GetMapping("/viewPass")//works perfect
-     public String ReturnPasswordRecord(Model model){
+    public String ReturnPasswordRecord(Model model){
         List<Password> p= addRecord.getAllPasswordRecords();
         model.addAttribute("passwordRecords",p);
         return "viewPasswordRecord";
-     }
+    }
 }
