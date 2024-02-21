@@ -45,6 +45,7 @@ public class HomeControllers {
 
     @PostMapping("/addRecord")
     public String addRecord(@ModelAttribute Password password) {
+        id = RandomNumberGenerator.generateRandomId();
         password.setId(id);
         this.databaseAccess.save(password);
         return "redirect:/";
